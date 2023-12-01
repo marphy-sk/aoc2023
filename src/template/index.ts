@@ -1,6 +1,4 @@
 import run from "aocrunner"
-import _ from "lodash"
-import {parseDataFromFile} from "../utils/fileUtils";
 
 const parseInput = (rawInput: string) => rawInput
 

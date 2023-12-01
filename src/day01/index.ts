@@ -1,7 +1,7 @@
 import run from "aocrunner"
-import _ from "lodash"
 
-const parseInput = (rawInput: string) => rawInput.split("\n").map((line) => line.trim())
+const parseInput = (rawInput: string) =>
+  rawInput.split("\n").map((line) => line.trim())
 
 const part1 = (rawInput: string) => {
   const input = parseInput(rawInput)
@@ -10,49 +10,70 @@ const part1 = (rawInput: string) => {
   const result: string[] = []
   // get first numeric chart and last numberic chart every line and sum them
   input.forEach((line) => {
-    const firstNumber = line.match(/\d/); // Find the first number
-    const lastNumber = line.match(/\d(?![^\n]*\d)/); // Find the last number
+    const firstNumber = line.match(/\d/) // Find the first number
+    const lastNumber = line.match(/\d(?![^\n]*\d)/) // Find the last number
     if (firstNumber && lastNumber) {
       result.push(`${firstNumber[0]}${lastNumber[0]}`)
     }
   })
 
-    // sum all result
+  // sum all result
   return result.reduce((a, b) => parseInt(String(a)) + parseInt(b), 0)
 }
 
 function convertNumberWordsToDigits(text: string) {
-  return text.replace(/one|two|three|four|five|six|seven|eight|nine/gi, function(matched: string) {
-      return numberWordsToDigits[matched.toLowerCase()];
-  });
+  return text.replace(
+    /one|two|three|four|five|six|seven|eight|nine/gi,
+    function (matched: string) {
+      return numberWordsToDigits[matched.toLowerCase()]
+    },
+  )
 }
 
-const numberWordsToDigits: {[key: string]: string} = {
-  nine: '9', eight: '8', seven: '7', six: '6',
-  five: '5', four: '4', three: '3', two: '2', one: '1'
-};
+const numberWordsToDigits: { [key: string]: string } = {
+  nine: "9",
+  eight: "8",
+  seven: "7",
+  six: "6",
+  five: "5",
+  four: "4",
+  three: "3",
+  two: "2",
+  one: "1",
+}
 
 function findRightmostNumber(inputString: string): string {
-  const numberWords = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'];
-  let rightmostIndex = -1;
-  let rightmostNumber: string | number = '';
+  const numberWords = [
+    "zero",
+    "one",
+    "two",
+    "three",
+    "four",
+    "five",
+    "six",
+    "seven",
+    "eight",
+    "nine",
+  ]
+  let rightmostIndex = -1
+  let rightmostNumber: string | number = ""
 
   // Check for number words
   for (const word of numberWords) {
-    const index = inputString.lastIndexOf(word);
+    const index = inputString.lastIndexOf(word)
     if (index !== -1 && (rightmostIndex === -1 || index > rightmostIndex)) {
-      rightmostIndex = index;
-      rightmostNumber = word;
+      rightmostIndex = index
+      rightmostNumber = word
     }
   }
 
   // Check for digits
   for (let i = 0; i <= 9; i++) {
-    const digit = i.toString();
-    const index = inputString.lastIndexOf(digit);
+    const digit = i.toString()
+    const index = inputString.lastIndexOf(digit)
     if (index !== -1 && (rightmostIndex === -1 || index > rightmostIndex)) {
-      rightmostIndex = index;
-      rightmostNumber = digit;
+      rightmostIndex = index
+      rightmostNumber = digit
     }
   }
 
@@ -65,8 +86,8 @@ const part2 = (rawInput: string) => {
   const result: string[] = []
   // get first numeric chart and last numberic chart every line and sum them
   input.forEach((line) => {
-    const firstNumber = convertNumberWordsToDigits(line).match(/\d/); // Find the first number
-    const lastNumber = findRightmostNumber(line); // Find the last number
+    const firstNumber = convertNumberWordsToDigits(line).match(/\d/) // Find the first number
+    const lastNumber = findRightmostNumber(line) // Find the last number
 
     if (firstNumber && lastNumber) {
       result.push(`${firstNumber[0]}${lastNumber}`)
@@ -100,8 +121,7 @@ treb7uchet
   part2: {
     tests: [
       {
-        input:
-`
+        input: `
 eight1qlfzvdtseven1threefour
 5slbnsevenmz
 8sixnzfctpblt

@@ -5,5 +5,3 @@
 Task description: [link](https://adventofcode.com/2023/day/1)
 
 ## Notes
-
-...
