@@ -56,7 +56,7 @@ function findRightmostNumber(inputString: string): string {
     }
   }
 
-  return _.isString(rightmostNumber) ? numberWordsToDigits[rightmostNumber] : rightmostNumber
+  return numberWordsToDigits[rightmostNumber] || rightmostNumber
 }
 
 const part2 = (rawInput: string) => {
