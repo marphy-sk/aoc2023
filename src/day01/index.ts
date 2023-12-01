@@ -18,7 +18,7 @@ const part1 = (rawInput: string) => {
   })
 
     // sum all result
-  return result.reduce((a, b) => parseInt(a) + parseInt(b), 0)
+  return result.reduce((a, b) => parseInt(String(a)) + parseInt(b), 0)
 }
 
 function convertNumberWordsToDigits(text: string) {
@@ -27,7 +27,7 @@ function convertNumberWordsToDigits(text: string) {
   });
 }
 
-const numberWordsToDigits = {
+const numberWordsToDigits: {[key: string]: string} = {
   nine: '9', eight: '8', seven: '7', six: '6',
   five: '5', four: '4', three: '3', two: '2', one: '1'
 };
@@ -35,7 +35,7 @@ const numberWordsToDigits = {
 function findRightmostNumber(inputString: string): string {
   const numberWords = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'];
   let rightmostIndex = -1;
-  let rightmostNumber: string | null = null;
+  let rightmostNumber: string | number = '';
 
   // Check for number words
   for (const word of numberWords) {
@@ -56,7 +56,7 @@ function findRightmostNumber(inputString: string): string {
     }
   }
 
-  return numberWordsToDigits[rightmostNumber] || rightmostNumber;
+  return _.isString(rightmostNumber) ? numberWordsToDigits[rightmostNumber] : rightmostNumber
 }
 
 const part2 = (rawInput: string) => {
@@ -65,9 +65,6 @@ const part2 = (rawInput: string) => {
   const result: string[] = []
   // get first numeric chart and last numberic chart every line and sum them
   input.forEach((line) => {
-
-    const numberWordToDigit = convertNumberWordsToDigits(line)
-
     const firstNumber = convertNumberWordsToDigits(line).match(/\d/); // Find the first number
     const lastNumber = findRightmostNumber(line); // Find the last number
 
